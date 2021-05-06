@@ -1,12 +1,10 @@
 package com.example.gb_2_08_recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -26,6 +24,21 @@ public class MainActivity extends AppCompatActivity {
             items.add(UUID.randomUUID().toString());
         }
 
+        RecyclerView importantList = findViewById(R.id.very_important_list);
+
+        RecyclerView.LayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        importantList.setLayoutManager(lm);
+
+        VeryImportantAdapter adapter = new VeryImportantAdapter();
+
+        importantList.setAdapter(adapter);
+
+        adapter.addData(items);
+
+        adapter.notifyDataSetChanged(); // отрисовка списка
+
+/*
         LinearLayout linearLayout = findViewById(R.id.root);
 
         for (String item: items) {
@@ -38,5 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
             linearLayout.addView(itemView);
         }
+*/
     }
 }
