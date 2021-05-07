@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.gb_2_08_recyclerview.R;
 import com.example.gb_2_08_recyclerview.domain.Note;
 
@@ -33,7 +34,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     @Override
     public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {
+        Note note = data.get(position);
+
         holder.title.setText(data.get(position).getTitle());
+
+        Glide.with(holder.image)
+                .load(note.getImageUrl())
+                .centerCrop()
+                .into(holder.image);
     }
 
     @Override
