@@ -3,6 +3,7 @@ package com.example.gb_2_08_recyclerview.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +47,7 @@ public class NotesListActivity extends AppCompatActivity {
 
         RecyclerView notesList = findViewById(R.id.notes_list);
 
-        RecyclerView.LayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager lm = new GridLayoutManager(this, 2);//new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         notesList.setLayoutManager(lm);
 
