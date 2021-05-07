@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.gb_2_08_recyclerview.R;
 import com.example.gb_2_08_recyclerview.domain.Note;
@@ -21,6 +22,13 @@ public class NotesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         NotesAdapter adapter = new NotesAdapter();
+
+        adapter.setClickListener(new NotesAdapter.NoteClickListener() {
+            @Override
+            public void onNoteClicked(Note note) {
+                Toast.makeText(NotesListActivity.this, note.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         NotesListViewModel viewModel = new ViewModelProvider(this).get(NotesListViewModel.class);
 

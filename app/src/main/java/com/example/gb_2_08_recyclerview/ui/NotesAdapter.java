@@ -20,6 +20,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private final ArrayList<Note> data = new ArrayList<>();
 
+    private NoteClickListener clickListener;
+
     public void addData(List<Note> toAdd) {
         data.clear();
         data.addAll(toAdd);
@@ -49,6 +51,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         return data.size();
     }
 
+    public NoteClickListener getClickListener() {
+        return clickListener;
+    }
+
+    public void setClickListener(NoteClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     class NotesViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
@@ -57,8 +67,21 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getClickListener() != null) {
+                        getClickListener().onNoteClicked(data.get(getAdapterPosition()));
+                    }
+                }
+            });
+
             title = itemView.findViewById(R.id.title);
             image = itemView.findViewById(R.id.image);
         }
+    }
+
+    interface NoteClickListener {
+        void onNoteClicked(Note note);
     }
 }
